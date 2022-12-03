@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="{% static 'css/stylee.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>produit</title>
+</head>
+<body>
+{% include "navBar.html" %}
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Liste <b>Des Articles</b></h2>
+          <h4>Date : {% now " l j E Y" %} </h4>
+          <p align="right">
+           
+            </p>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Sociéte de création</th>
+          <th>Prix(DT)</th>
+          <th>Date de création</th>
+          <th>Type</th>
+          <th>Satisfaction d'un client</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for a in prod %}
+      
+        <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ a.nom }}</td>
+            <td>{{ a.realisateur }}</td>
+            <td>{{ a.prix }}</td>
+            <td>{{ a.datedecreation }}</td>
+            {% for t in type %}
+            {% if t.id == a.type_id %}
+            <td>{{t.nomType}}</td>
+            {% endif %}
+            {% endfor %}  
+            {% if a.prix < 1000 %} 
+            <td style="color:green">prix raisonnable</td>
+            {% else %}
+            <td style="color:brown">Trés cher</td>
+            {% endif %}
+            <td><a href="update_typ/{{ a.id }}"><i class="fas fa-edit"></i></a></td>
+          <td>
+            <a href="del_typ/{{ a.id }}" onclick="return confirm('Etes vous sure de vouloir supprimer cette type?')" class="delete" data-toggle="modal"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="addtele/" class="btn btn-primary">Ajouter un telephone</a>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{% static 'stylee.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>produit</title>
+</head>
+<body>
+{% include "navBar.html" %}
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Liste <b>Des Types</b></h2>
+          <h4>Date : {% now " l j E Y" %} </h4>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NomType</th>
+          <th>Description Type</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+       {% for a in typ %}
+      
+        <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ a.nomType }}</td>
+            <td>{{ a.description}}</td>
+          <td>
+            <a href="del_prod/{{ a.id }}" onclick="return confirm('Etes vous sure de vouloir supprimer cette type?')" class="delete" data-toggle="modal"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+  </div>
+</div>
+
+
+</body>
+</html>

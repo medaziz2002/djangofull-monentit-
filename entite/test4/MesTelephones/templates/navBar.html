@@ -1,0 +1,39 @@
+<Navbar>
+  <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+      <a class="navbar-brand" href="">Mes Telephones </a>
+      <div class="collapse navbar-collapse">
+          {% if request.user.is_authenticated %}
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'MesTelephones' %}">Mes Telephones</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'types' %}">Types</a>
+              </li>
+              {% if request.user.is_staff %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users' %}">Utilisateurs</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/admin">Administration</a>
+              </li>
+              {% endif %}
+          </ul>
+          {% endif %}
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">[{{ request.session.username }}]</a>
+              </li>
+              <li class="nav-item">
+                  {% if request.user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'disconnect' %}">Déconnexion</a>
+              </li>
+              {% else %}
+              
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'connect' %}">Connexion</a>
+              </li> 
+              {% endif  %}
+          </ul>
+      </div>
+  </nav>

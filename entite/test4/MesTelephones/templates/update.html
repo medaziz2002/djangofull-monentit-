@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Modification d'un telephone</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+</head>
+
+<body>
+    {% include "navBar.html" %}
+    <h1>
+        <center>Modifier un Telephone</center>
+    </h1>
+    <form action="update_typ_action/{{ art.id }}" method="post">
+        {% csrf_token %}
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Nom</label>
+
+            <input name="nom" value="{{ art.nom }}" class="form-control"></td>
+
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Prix </label>
+            <input name="prix" value="{{ art.prix |floatformat:3 }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Réalisateur</label>
+            <input type="text" name="realisateur" value="{{ art.realisateur }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Date de création </label>
+            <input readonly name="datedecreation" value="{{ art.datedecreation | date:"j/M/Y" }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Type </label>
+            
+            <select name="nomtype" class="form-control form-control-lg">
+                <option value="1">ANDROID</option>
+            <option value="2">IOS</option>
+                {% for t in typ %}
+            
+                    <option value="{{t.id}}">{{t.nomType}}</option>
+                {% endfor %}
+            </select>
+           
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <br><input type="submit" value="Modifier" class="btn btn-success">
+        </div>
+    </form>
+</body>
+
+</html>
